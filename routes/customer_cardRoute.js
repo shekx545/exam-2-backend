@@ -3,6 +3,7 @@ const router = Router();
 
 const {
   createCustomerCard,
+  searchCustomerCard,
   getCustomerCards,
   getCustomerCardById,
   updateCustomerCard,
@@ -76,6 +77,30 @@ router.post("/create_customer_card",validateSchema(createCustomerCardValidationS
  *         description: Serverdagi ichki xatolik
  */
 router.get("/get_customer_card", getCustomerCards);
+
+/**
+ * @swagger
+ * /customer_card/search:
+ *   get:
+ *     summary: Customer cardlarni qidirish
+ *     tags: [CustomerCard]
+ *     description: Mijoz kartalarini qidirish
+ *     parameters:
+ *       - in: query
+ *         name: query
+ *         description: Qidiruv so'rovi
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Qidiruv natijalari muvaffaqiyatli qaytarildi
+ *       '400':
+ *         description: Yaroqsiz qidiruv so'rovi
+ *       '500':
+ *         description: Serverdagi ichki xatolik
+ */
+router.get("/search", searchCustomerCard);
 
 /**
  * @swagger

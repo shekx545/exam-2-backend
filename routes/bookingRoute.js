@@ -3,6 +3,7 @@ const router = Router();
 
 const {
   createBooking,
+  searchBooking,
   getBookings,
   getBookingById,
   updateBooking,
@@ -76,6 +77,30 @@ router.post( "/createbooking", validateSchema(createBookingValidationSchema), cr
  *         description: Ichki server xatosi
  */
 router.get("/getbooking", getBookings);
+
+/**
+ * @swagger
+ * /booking/search:
+ *   get:
+ *     summary: Bookinglarni qidirish
+ *     tags: [Booking]
+ *     description: Band qilish ma'lumotlarini qidirish
+ *     parameters:
+ *       - in: query
+ *         name: query
+ *         description: Qidiruv so'rovi
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Qidiruv natijalari muvaffaqiyatli qaytarildi
+ *       '400':
+ *         description: Yaroqsiz qidiruv so'rovi
+ *       '500':
+ *         description: Serverdagi ichki xatolik
+ */
+router.get("/search", searchBooking);
 
 /**
  * @swagger

@@ -3,6 +3,7 @@ const router = Router();
 
 const {
   createLang,
+  searchLang,
   getLangs,
   getLangById,
   updateLang,
@@ -62,6 +63,30 @@ router.post("/createlang",validateSchema(createLangValidationSchema),createLang)
  *         description: Serverdagi ichki xatolik
  */
 router.get("/getlang", getLangs);
+
+/**
+ * @swagger
+ * /lang/search:
+ *   get:
+ *     summary: Langlarni qidirish
+ *     tags: [Lang]
+ *     description: Til ma'lumotlarini qidirish
+ *     parameters:
+ *       - in: query
+ *         name: query
+ *         description: Qidiruv so'rovi
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Qidiruv natijalari muvaffaqiyatli qaytarildi
+ *       '400':
+ *         description: Yaroqsiz qidiruv so'rovi
+ *       '500':
+ *         description: Serverdagi ichki xatolik
+ */
+router.get("/search", searchLang);
 
 /**
  * @swagger

@@ -3,6 +3,7 @@ const router = Router();
 
 const {
   createPaymentMethod,
+  searchPaymentMethod,
   getPaymentMethods,
   getPaymentMethodById,
   updatePaymentMethod,
@@ -62,6 +63,30 @@ router.post("/create_payment_method",validateSchema(createPaymentMethodValidatio
  *         description: Serverdagi ichki xatolik
  */
 router.get("/get_payment_method", getPaymentMethods);
+
+/**
+ * @swagger
+ * /payment_method/search:
+ *   get:
+ *     summary: Payment methodlarni qidirish
+ *     tags: [PaymentMethod]
+ *     description: To'lov usullarini qidirish
+ *     parameters:
+ *       - in: query
+ *         name: query
+ *         description: Qidiruv so'rovi
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Qidiruv natijalari muvaffaqiyatli qaytarildi
+ *       '400':
+ *         description: Yaroqsiz qidiruv so'rovi
+ *       '500':
+ *         description: Serverdagi ichki xatolik
+ */
+router.get("/search", searchPaymentMethod);
 
 /**
  * @swagger

@@ -3,6 +3,7 @@ const router = Router();
 
 const {
   createVenuePhoto,
+  searchVenuePhoto,
   getVenuePhotos,
   getVenuePhotoById,
   updateVenuePhoto,
@@ -64,6 +65,30 @@ router.post("/create_venue_photo",validateSchema(createVenuePhotoValidationSchem
  *         description: Serverdagi ichki xatolik
  */
 router.get("/get_venue_photo", getVenuePhotos);
+
+/**
+ * @swagger
+ * /venue_photo/search:
+ *   get:
+ *     summary: Venue photolarni qidirish
+ *     tags: [VenuePhoto]
+ *     description: Joy rasmlarini qidirish
+ *     parameters:
+ *       - in: query
+ *         name: query
+ *         description: Qidiruv so'rovi
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Qidiruv natijalari muvaffaqiyatli qaytarildi
+ *       '400':
+ *         description: Yaroqsiz qidiruv so'rovi
+ *       '500':
+ *         description: Serverdagi ichki xatolik
+ */
+router.get("/search", searchVenuePhoto);
 
 /**
  * @swagger

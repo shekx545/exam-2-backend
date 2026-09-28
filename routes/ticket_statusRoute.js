@@ -3,6 +3,7 @@ const router = Router();
 
 const {
   createTicketStatus,
+  searchTicketStatus,
   getTicketStatuses,
   getTicketStatusById,
   updateTicketStatus,
@@ -62,6 +63,30 @@ router.post("/create_ticket_status",validateSchema(createTicketStatusValidationS
  *         description: Serverdagi ichki xatolik
  */
 router.get("/get_ticket_status", getTicketStatuses);
+
+/**
+ * @swagger
+ * /ticket_status/search:
+ *   get:
+ *     summary: Ticket statuslarni qidirish
+ *     tags: [TicketStatus]
+ *     description: Chipta holatlarini qidirish
+ *     parameters:
+ *       - in: query
+ *         name: query
+ *         description: Qidiruv so'rovi
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Qidiruv natijalari muvaffaqiyatli qaytarildi
+ *       '400':
+ *         description: Yaroqsiz qidiruv so'rovi
+ *       '500':
+ *         description: Serverdagi ichki xatolik
+ */
+router.get("/search", searchTicketStatus);
 
 /**
  * @swagger

@@ -64,8 +64,6 @@ const searchAdmin = async (req, res) => {
       innerData: result,
     });
   } catch (error) {
-    console.error("Search error:", error);
-
     return res.status(500).json({
       success: false,
       message: "Server xatoligi: Admin ma'lumotlarini yuklab bo'lmadi.",

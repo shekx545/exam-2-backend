@@ -3,6 +3,7 @@ const router = Router();
 
 const {
   createVenue,
+  searchVenue,
   getVenues,
   getVenueById,
   updateVenue,
@@ -76,6 +77,30 @@ router.post("/create_venue",validateSchema(createVenueValidationSchema),createVe
  *         description: Serverdagi ichki xatolik
  */
 router.get("/get_venue", getVenues);
+
+/**
+ * @swagger
+ * /venue/search:
+ *   get:
+ *     summary: Venuelarni qidirish
+ *     tags: [Venue]
+ *     description: Tadbir joylarini qidirish
+ *     parameters:
+ *       - in: query
+ *         name: query
+ *         description: Qidiruv so'rovi
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Qidiruv natijalari muvaffaqiyatli qaytarildi
+ *       '400':
+ *         description: Yaroqsiz qidiruv so'rovi
+ *       '500':
+ *         description: Serverdagi ichki xatolik
+ */
+router.get("/search", searchVenue);
 
 /**
  * @swagger

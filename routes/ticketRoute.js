@@ -3,6 +3,7 @@ const router = Router();
 
 const {
   createTicket,
+  searchTicket,
   getTickets,
   getTicketById,
   updateTicket,
@@ -72,6 +73,30 @@ router.post("/create_ticket",validateSchema(createTicketValidationSchema),create
  *         description: Serverdagi ichki xatolik
  */
 router.get("/get_ticket", getTickets);
+
+/**
+ * @swagger
+ * /ticket/search:
+ *   get:
+ *     summary: Ticketlarni qidirish
+ *     tags: [Ticket]
+ *     description: Chipta ma'lumotlarini qidirish
+ *     parameters:
+ *       - in: query
+ *         name: query
+ *         description: Qidiruv so'rovi
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Qidiruv natijalari muvaffaqiyatli qaytarildi
+ *       '400':
+ *         description: Yaroqsiz qidiruv so'rovi
+ *       '500':
+ *         description: Serverdagi ichki xatolik
+ */
+router.get("/search", searchTicket);
 
 /**
  * @swagger

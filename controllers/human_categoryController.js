@@ -140,10 +140,42 @@ const deleteHumanCategory = async (req, res) => {
   }
 };
 
+const searchHumanCategory = async (req, res) => {
+  try {
+    const { query } = req.query;
+
+    if (!query || typeof query !== "string") {
+      return res.status(400).json({
+        success: false,
+        message: "Yaroqsiz qidiruv so'rovi.",
+      });
+    }
+
+    const result = await HumanCategory.find({
+      $or: [
+        { name: { $regex: query, $options: "i" } },
+      ],
+    });
+
+    return res.status(200).json({
+      success: true,
+      message: "Qidiruv natijalari:",
+      innerData: result,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Server xatoligi: HumanCategory ma'lumotlarini yuklab bo'lmadi.",
+      error: error.message,
+    });
+  }
+};
+
 module.exports = {
   createHumanCategory,
   getHumanCategories,
   getHumanCategoryById,
   updateHumanCategory,
   deleteHumanCategory,
-};
+  searchHumanCategory,
+};

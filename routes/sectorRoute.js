@@ -3,6 +3,7 @@ const router = Router();
 
 const {
   createSector,
+  searchSector,
   getSectors,
   getSectorById,
   updateSector,
@@ -62,6 +63,30 @@ router.post("/createsector",validateSchema(createSectorValidationSchema),createS
  *         description: Serverdagi ichki xatolik
  */
 router.get("/getsector", getSectors);
+
+/**
+ * @swagger
+ * /sector/search:
+ *   get:
+ *     summary: Sectorlarni qidirish
+ *     tags: [Sector]
+ *     description: Sektor ma'lumotlarini qidirish
+ *     parameters:
+ *       - in: query
+ *         name: query
+ *         description: Qidiruv so'rovi
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Qidiruv natijalari muvaffaqiyatli qaytarildi
+ *       '400':
+ *         description: Yaroqsiz qidiruv so'rovi
+ *       '500':
+ *         description: Serverdagi ichki xatolik
+ */
+router.get("/search", searchSector);
 
 /**
  * @swagger

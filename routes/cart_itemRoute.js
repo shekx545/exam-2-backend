@@ -3,6 +3,7 @@ const router = Router();
 
 const {
   createCartItem,
+  searchCartItem,
   getCartItems,
   getCartItemById,
   updateCartItem,
@@ -64,6 +65,30 @@ router.post("/createCartItem", validateSchema(createCartItemValidationSchema), c
  *         description: Ichki server xatosi
  */
 router.get("/getCartItem", getCartItems);
+
+/**
+ * @swagger
+ * /cart_item/search:
+ *   get:
+ *     summary: Cart itemlarni qidirish
+ *     tags: [Cart Item]
+ *     description: Savatdagi elementlarni qidirish
+ *     parameters:
+ *       - in: query
+ *         name: query
+ *         description: Qidiruv so'rovi
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Qidiruv natijalari muvaffaqiyatli qaytarildi
+ *       '400':
+ *         description: Yaroqsiz qidiruv so'rovi
+ *       '500':
+ *         description: Serverdagi ichki xatolik
+ */
+router.get("/search", searchCartItem);
 
 /**
  * @swagger

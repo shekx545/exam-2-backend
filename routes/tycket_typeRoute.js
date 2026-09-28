@@ -3,6 +3,7 @@ const router = Router();
 
 const {
   createTycketType,
+  searchTycketType,
   getTycketTypes,
   getTycketTypeById,
   updateTycketType,
@@ -62,6 +63,30 @@ router.post("/create_tycket_type",validateSchema(createTycketTypeValidationSchem
  *         description: Serverdagi ichki xatolik
  */
 router.get("/get_tycket_type", getTycketTypes);
+
+/**
+ * @swagger
+ * /tycket_type/search:
+ *   get:
+ *     summary: Tycket typelarni qidirish
+ *     tags: [TycketType]
+ *     description: Chipta turlarini qidirish
+ *     parameters:
+ *       - in: query
+ *         name: query
+ *         description: Qidiruv so'rovi
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Qidiruv natijalari muvaffaqiyatli qaytarildi
+ *       '400':
+ *         description: Yaroqsiz qidiruv so'rovi
+ *       '500':
+ *         description: Serverdagi ichki xatolik
+ */
+router.get("/search", searchTycketType);
 
 /**
  * @swagger

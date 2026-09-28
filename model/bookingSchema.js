@@ -8,7 +8,7 @@ const bookingSchema = new Schema(
     payment_method_id: { type: Schema.Types.ObjectId, ref: "Payment_method" },
     delivery_method_id: { type: Schema.Types.ObjectId, ref: "Delivery_method" },
     discount_id: { type: Schema.Types.ObjectId, ref: "Discount" },
-    status_id: { type: Schema.Types.ObjectId, ref: "Status" },
+    status_id: { type: Schema.Types.ObjectId, ref: "Ticket_status" },
   },
   { timestamps: true }
 );

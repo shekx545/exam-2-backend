@@ -3,6 +3,7 @@ const router = Router();
 
 const {
   createDistrict,
+  searchDistrict,
   getDistricts,
   getDistrictById,
   updateDistrict,
@@ -64,6 +65,30 @@ router.post("/createdistrict",validateSchema(createDistrictValidationSchema),cre
  *         description: Serverdagi ichki xatolik
  */
 router.get("/getdistrict", getDistricts);
+
+/**
+ * @swagger
+ * /district/search:
+ *   get:
+ *     summary: Districtlarni qidirish
+ *     tags: [District]
+ *     description: Tuman ma'lumotlarini qidirish
+ *     parameters:
+ *       - in: query
+ *         name: query
+ *         description: Qidiruv so'rovi
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Qidiruv natijalari muvaffaqiyatli qaytarildi
+ *       '400':
+ *         description: Yaroqsiz qidiruv so'rovi
+ *       '500':
+ *         description: Serverdagi ichki xatolik
+ */
+router.get("/search", searchDistrict);
 
 /**
  * @swagger

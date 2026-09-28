@@ -3,6 +3,7 @@ const router = Router();
 
 const {
   createHumanCategory,
+  searchHumanCategory,
   getHumanCategories,
   getHumanCategoryById,
   updateHumanCategory,
@@ -68,6 +69,30 @@ router.post("/create_human_category",validateSchema(createHumanCategoryValidatio
  *         description: Serverdagi ichki xatolik
  */
 router.get("/get_human_category", getHumanCategories);
+
+/**
+ * @swagger
+ * /human_category/search:
+ *   get:
+ *     summary: Human categorylarni qidirish
+ *     tags: [HumanCategory]
+ *     description: Inson toifalarini qidirish
+ *     parameters:
+ *       - in: query
+ *         name: query
+ *         description: Qidiruv so'rovi
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Qidiruv natijalari muvaffaqiyatli qaytarildi
+ *       '400':
+ *         description: Yaroqsiz qidiruv so'rovi
+ *       '500':
+ *         description: Serverdagi ichki xatolik
+ */
+router.get("/search", searchHumanCategory);
 
 /**
  * @swagger

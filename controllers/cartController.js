@@ -141,10 +141,43 @@ const deleteCart = async (req, res) => {
   }
 };
 
+const searchCart = async (req, res) => {
+  try {
+    const { query } = req.query;
+
+    if (!query || typeof query !== "string") {
+      return res.status(400).json({
+        success: false,
+        message: "Yaroqsiz qidiruv so'rovi.",
+      });
+    }
+
+    const result = await Cart.find({
+      $or: [
+        { customer_id: { $regex: query, $options: "i" } },
+        { status_id: { $regex: query, $options: "i" } },
+      ],
+    });
+
+    return res.status(200).json({
+      success: true,
+      message: "Qidiruv natijalari:",
+      innerData: result,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Server xatoligi: Cart ma'lumotlarini yuklab bo'lmadi.",
+      error: error.message,
+    });
+  }
+};
+
 module.exports = {
   createCart,
   getCarts,
   getCartById,
   updateCart,
   deleteCart,
-}; 
+  searchCart,
+}; 

@@ -3,6 +3,7 @@ const router = Router();
 
 const {
   createCountry,
+  searchCountry,
   getCountries,
   getCountryById,
   updateCountry,
@@ -62,6 +63,30 @@ router.post("/create_country",validateSchema(createCountryValidationSchema),crea
  *         description: Serverdagi ichki xatolik
  */
 router.get("/get_country", getCountries);
+
+/**
+ * @swagger
+ * /country/search:
+ *   get:
+ *     summary: Countrylarni qidirish
+ *     tags: [Country]
+ *     description: Mamlakat ma'lumotlarini qidirish
+ *     parameters:
+ *       - in: query
+ *         name: query
+ *         description: Qidiruv so'rovi
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Qidiruv natijalari muvaffaqiyatli qaytarildi
+ *       '400':
+ *         description: Yaroqsiz qidiruv so'rovi
+ *       '500':
+ *         description: Serverdagi ichki xatolik
+ */
+router.get("/search", searchCountry);
 
 /**
  * @swagger

@@ -172,10 +172,45 @@ const deleteCustomer = async (req, res) => {
   }
 };
 
+const searchCustomer = async (req, res) => {
+  try {
+    const { query } = req.query;
+
+    if (!query || typeof query !== "string") {
+      return res.status(400).json({
+        success: false,
+        message: "Yaroqsiz qidiruv so'rovi.",
+      });
+    }
+
+    const result = await Customer.find({
+      $or: [
+        { first_name: { $regex: query, $options: "i" } },
+        { last_name: { $regex: query, $options: "i" } },
+        { phone: { $regex: query, $options: "i" } },
+        { email: { $regex: query, $options: "i" } },
+      ],
+    }).select("-hashed_password -hashed_refresh_token");
+
+    return res.status(200).json({
+      success: true,
+      message: "Qidiruv natijalari:",
+      innerData: result,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Server xatoligi: Customer ma'lumotlarini yuklab bo'lmadi.",
+      error: error.message,
+    });
+  }
+};
+
 module.exports = {
   createCustomer,
   getCustomers,
   getCustomerById,
   updateCustomer,
   deleteCustomer,
-};
+  searchCustomer,
+};

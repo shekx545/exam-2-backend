@@ -12,7 +12,7 @@ const eventSchema = new Schema(
     event_type_id: { type: Schema.Types.ObjectId, ref: "EventType", required: true },
     human_category_id: { type: Schema.Types.ObjectId, ref: "HumanCategory", required: true },
     venue_id: { type: Schema.Types.ObjectId, ref: "Venue", required: true },
-    lang_id: { type: Schema.Types.ObjectId, ref: "Language", required: true },
+    lang_id: { type: Schema.Types.ObjectId, ref: "Lang", required: true },
     release_date: { type: Date },
   },
   { timestamps: true }

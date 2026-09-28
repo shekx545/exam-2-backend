@@ -178,10 +178,47 @@ const deleteCustomerAddress = async (req, res) => {
   }
 };
 
+const searchCustomerAddress = async (req, res) => {
+  try {
+    const { query } = req.query;
+
+    if (!query || typeof query !== "string") {
+      return res.status(400).json({
+        success: false,
+        message: "Yaroqsiz qidiruv so'rovi.",
+      });
+    }
+
+    const result = await Customer_address.find({
+      $or: [
+        { name: { $regex: query, $options: "i" } },
+        { street: { $regex: query, $options: "i" } },
+        { house: { $regex: query, $options: "i" } },
+        { location: { $regex: query, $options: "i" } },
+        { post_index: { $regex: query, $options: "i" } },
+        { info: { $regex: query, $options: "i" } },
+      ],
+    });
+
+    return res.status(200).json({
+      success: true,
+      message: "Qidiruv natijalari:",
+      innerData: result,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Server xatoligi: Customer address ma'lumotlarini yuklab bo'lmadi.",
+      error: error.message,
+    });
+  }
+};
+
 module.exports = {
   createCustomerAddress,
   getCustomerAddresses,
   getCustomerAddressById,
   updateCustomerAddress,
   deleteCustomerAddress,
-};
+  searchCustomerAddress,
+};

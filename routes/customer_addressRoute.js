@@ -3,6 +3,7 @@ const router = Router();
 
 const {
   createCustomerAddress,
+  searchCustomerAddress,
   getCustomerAddresses,
   getCustomerAddressById,
   updateCustomerAddress,
@@ -80,6 +81,30 @@ router.post("/create_customer_address",validateSchema(createCustomerAddressValid
  *         description: Serverdagi ichki xatolik
  */
 router.get("/get_customer_address", getCustomerAddresses);
+
+/**
+ * @swagger
+ * /customer_address/search:
+ *   get:
+ *     summary: Customer addresslarni qidirish
+ *     tags: [CustomerAddress]
+ *     description: Mijoz manzillarini qidirish
+ *     parameters:
+ *       - in: query
+ *         name: query
+ *         description: Qidiruv so'rovi
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Qidiruv natijalari muvaffaqiyatli qaytarildi
+ *       '400':
+ *         description: Yaroqsiz qidiruv so'rovi
+ *       '500':
+ *         description: Serverdagi ichki xatolik
+ */
+router.get("/search", searchCustomerAddress);
 
 /**
  * @swagger

@@ -3,6 +3,7 @@ const router = Router();
 
 const {
   createSeatType,
+  searchSeatType,
   getSeatTypes,
   getSeatTypeById,
   updateSeatType,
@@ -62,6 +63,30 @@ router.post("/create_seat_type",validateSchema(createSeatTypeValidationSchema),c
  *         description: Serverdagi ichki xatolik
  */
 router.get("/get_seat_type", getSeatTypes);
+
+/**
+ * @swagger
+ * /seat_type/search:
+ *   get:
+ *     summary: Seat typelarni qidirish
+ *     tags: [SeatType]
+ *     description: O'rindiq turlarini qidirish
+ *     parameters:
+ *       - in: query
+ *         name: query
+ *         description: Qidiruv so'rovi
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Qidiruv natijalari muvaffaqiyatli qaytarildi
+ *       '400':
+ *         description: Yaroqsiz qidiruv so'rovi
+ *       '500':
+ *         description: Serverdagi ichki xatolik
+ */
+router.get("/search", searchSeatType);
 
 /**
  * @swagger

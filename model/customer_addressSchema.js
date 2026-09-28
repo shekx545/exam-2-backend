@@ -8,7 +8,7 @@ const customer_addressSchema = new Schema(
     district_id: { type: Schema.Types.ObjectId, ref: "District", required: true },
     street: { type: String, required: true },
     house: { type: String, required: true },
-    flat_id: { type: Number, required: true },
+    flat_id: { type: Schema.Types.ObjectId, ref: "Flat", required: true },
     location: { type: String },
     post_index: { type: String },
     info: { type: String },

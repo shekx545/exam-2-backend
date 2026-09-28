@@ -3,6 +3,7 @@ const router = Router();
 
 const {
   createType,
+  searchType,
   getTypes,
   getTypeById,
   updateType,
@@ -62,6 +63,30 @@ router.post("/createtypes",validateSchema(createTypeValidationSchema),createType
  *         description: Serverdagi ichki xatolik
  */
 router.get("/gettypes", getTypes);
+
+/**
+ * @swagger
+ * /types/search:
+ *   get:
+ *     summary: Typeslarni qidirish
+ *     tags: [Types]
+ *     description: Turlar ma'lumotlarini qidirish
+ *     parameters:
+ *       - in: query
+ *         name: query
+ *         description: Qidiruv so'rovi
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Qidiruv natijalari muvaffaqiyatli qaytarildi
+ *       '400':
+ *         description: Yaroqsiz qidiruv so'rovi
+ *       '500':
+ *         description: Serverdagi ichki xatolik
+ */
+router.get("/search", searchType);
 
 /**
  * @swagger

@@ -3,6 +3,7 @@ const router = Router();
 
 const {
   createGender,
+  searchGender,
   getGenders,
   getGenderById,
   updateGender,
@@ -62,6 +63,30 @@ router.post("/creategender",validateSchema(createGenderValidationSchema),createG
  *         description: Serverdagi ichki xatolik
  */
 router.get("/getgender", getGenders);
+
+/**
+ * @swagger
+ * /gender/search:
+ *   get:
+ *     summary: Genderlarni qidirish
+ *     tags: [Gender]
+ *     description: Jins ma'lumotlarini qidirish
+ *     parameters:
+ *       - in: query
+ *         name: query
+ *         description: Qidiruv so'rovi
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Qidiruv natijalari muvaffaqiyatli qaytarildi
+ *       '400':
+ *         description: Yaroqsiz qidiruv so'rovi
+ *       '500':
+ *         description: Serverdagi ichki xatolik
+ */
+router.get("/search", searchGender);
 
 /**
  * @swagger

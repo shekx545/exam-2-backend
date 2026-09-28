@@ -3,6 +3,7 @@ const router = Router();
 
 const {
   createDiscount,
+  searchDiscount,
   getDiscounts,
   getDiscountById,
   updateDiscount,
@@ -65,6 +66,30 @@ router.post("/creatediscount",validateSchema(createDiscountValidationSchema),cre
  *         description: Serverdagi ichki xatolik
  */
 router.get("/getdiscount", getDiscounts);
+
+/**
+ * @swagger
+ * /discount/search:
+ *   get:
+ *     summary: Discountlarni qidirish
+ *     tags: [Discount]
+ *     description: Chegirma ma'lumotlarini qidirish
+ *     parameters:
+ *       - in: query
+ *         name: query
+ *         description: Qidiruv so'rovi
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Qidiruv natijalari muvaffaqiyatli qaytarildi
+ *       '400':
+ *         description: Yaroqsiz qidiruv so'rovi
+ *       '500':
+ *         description: Serverdagi ichki xatolik
+ */
+router.get("/search", searchDiscount);
 
 /**
  * @swagger

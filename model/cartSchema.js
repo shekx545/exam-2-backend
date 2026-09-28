@@ -5,7 +5,7 @@ const cartSchema = new Schema(
         customer_id: {type: Schema.Types.ObjectId, ref: "Customer"},
         createdAt: {type: Date,default: Date.now},
         fineshedAt: {type: Date, default: null},
-        status_id: { type: Schema.Types.ObjectId, ref: "Status" },
+        status_id: { type: Schema.Types.ObjectId, ref: "Ticket_status" },
     },
     { timestamps: true }
 );

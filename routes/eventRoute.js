@@ -3,6 +3,7 @@ const router = Router();
 
 const {
   createEvent,
+  searchEvent,
   getEvents,
   getEventById,
   updateEvent,
@@ -87,6 +88,30 @@ router.post("/create_event",validateSchema(createEventValidationSchema),createEv
  *         description: Serverdagi ichki xatolik
  */
 router.get("/get_event", getEvents);
+
+/**
+ * @swagger
+ * /event/search:
+ *   get:
+ *     summary: Eventlarni qidirish
+ *     tags: [Event]
+ *     description: Tadbir ma'lumotlarini qidirish
+ *     parameters:
+ *       - in: query
+ *         name: query
+ *         description: Qidiruv so'rovi
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Qidiruv natijalari muvaffaqiyatli qaytarildi
+ *       '400':
+ *         description: Yaroqsiz qidiruv so'rovi
+ *       '500':
+ *         description: Serverdagi ichki xatolik
+ */
+router.get("/search", searchEvent);
 
 /**
  * @swagger

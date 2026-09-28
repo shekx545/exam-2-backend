@@ -3,6 +3,7 @@ const router = Router();
 
 const {
   createFlat,
+  searchFlat,
   getFlats,
   getFlatById,
   updateFlat,
@@ -64,6 +65,30 @@ router.post("/createflat",validateSchema(createFlatValidationSchema),createFlat)
  *         description: Serverdagi ichki xatolik
  */
 router.get("/getflat", getFlats);
+
+/**
+ * @swagger
+ * /flat/search:
+ *   get:
+ *     summary: Flatlarni qidirish
+ *     tags: [Flat]
+ *     description: Xonadon ma'lumotlarini qidirish
+ *     parameters:
+ *       - in: query
+ *         name: query
+ *         description: Qidiruv so'rovi
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Qidiruv natijalari muvaffaqiyatli qaytarildi
+ *       '400':
+ *         description: Yaroqsiz qidiruv so'rovi
+ *       '500':
+ *         description: Serverdagi ichki xatolik
+ */
+router.get("/search", searchFlat);
 
 /**
  * @swagger

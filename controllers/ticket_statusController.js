@@ -130,10 +130,42 @@ const deleteTicketStatus = async (req, res) => {
   }
 };
 
+const searchTicketStatus = async (req, res) => {
+  try {
+    const { query } = req.query;
+
+    if (!query || typeof query !== "string") {
+      return res.status(400).json({
+        success: false,
+        message: "Yaroqsiz qidiruv so'rovi.",
+      });
+    }
+
+    const result = await Ticket_status.find({
+      $or: [
+        { name: { $regex: query, $options: "i" } },
+      ],
+    });
+
+    return res.status(200).json({
+      success: true,
+      message: "Qidiruv natijalari:",
+      innerData: result,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Server xatoligi: Ticket status ma'lumotlarini yuklab bo'lmadi.",
+      error: error.message,
+    });
+  }
+};
+
 module.exports = {
   createTicketStatus,
   getTicketStatuses,
   getTicketStatusById,
   updateTicketStatus,
   deleteTicketStatus,
-};
+  searchTicketStatus,
+};

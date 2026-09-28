@@ -3,6 +3,7 @@ const router = Router();
 
 const {
   createVenueType,
+  searchVenueType,
   getVenueTypes,
   getVenueTypeById,
   updateVenueType,
@@ -64,6 +65,30 @@ router.post("/create_venue_types",validateSchema(createVenueTypeValidationSchema
  *         description: Serverdagi ichki xatolik
  */
 router.get("/get_venue_types", getVenueTypes);
+
+/**
+ * @swagger
+ * /venue_types/search:
+ *   get:
+ *     summary: Venue typeslarni qidirish
+ *     tags: [VenueTypes]
+ *     description: Joy turlarini qidirish
+ *     parameters:
+ *       - in: query
+ *         name: query
+ *         description: Qidiruv so'rovi
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Qidiruv natijalari muvaffaqiyatli qaytarildi
+ *       '400':
+ *         description: Yaroqsiz qidiruv so'rovi
+ *       '500':
+ *         description: Serverdagi ichki xatolik
+ */
+router.get("/search", searchVenueType);
 
 /**
  * @swagger

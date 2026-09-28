@@ -74,6 +74,30 @@ router.get("/getadmin", getAdmin);
 
 /**
  * @swagger
+ * /admin/search:
+ *   get:
+ *     summary: Adminlarni qidirish
+ *     tags: [Admin]
+ *     description: Admin ma'lumotlarini qidirish
+ *     parameters:
+ *       - in: query
+ *         name: query
+ *         description: Qidiruv so'rovi
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Qidiruv natijalari muvaffaqiyatli qaytarildi
+ *       '400':
+ *         description: Yaroqsiz qidiruv so'rovi
+ *       '500':
+ *         description: Serverdagi ichki xatolik
+ */
+router.get("/search", searchAdmin);
+
+/**
+ * @swagger
  * /admin/getadmin/{id}:
  *   get:
  *     summary: Adminni ID bo'yicha olish
@@ -142,29 +166,6 @@ router.get("/getadmin/:id", getAdminById);
  */
 router.put("/updateadmin/:id", validateSchema(updateAdminValidationSchema), updateAdmin);
 
-/**
- * @swagger
- * /admin/search:
- *   get:
- *     summary: Adminlarni qidirish
- *     tags: [Admin]
- *     description: Adminlarni qidirish (masalan, ism yoki login bo'yicha)
- *     parameters:
- *       - in: query
- *         name: query
- *         description: Qidiruv so'rovi orqali adminni izlash
- *         required: true
- *         schema:
- *           type: string
- *     responses:
- *       '200':
- *         description: Qidiruv natijalari muvaffaqiyatli qaytarildi
- *       '404':
- *         description: Admin topilmadi
- *       '500':
- *         description: Ichki server xatosi
- */
-router.get("/search", searchAdmin);
 
 /**
  * @swagger

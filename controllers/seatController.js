@@ -162,10 +162,42 @@ const deleteSeat = async (req, res) => {
   }
 };
 
+const searchSeat = async (req, res) => {
+  try {
+    const { query } = req.query;
+
+    if (!query || typeof query !== "string") {
+      return res.status(400).json({
+        success: false,
+        message: "Yaroqsiz qidiruv so'rovi.",
+      });
+    }
+
+    const result = await Seat.find({
+      $or: [
+        { location_in_schema: { $regex: query, $options: "i" } },
+      ],
+    });
+
+    return res.status(200).json({
+      success: true,
+      message: "Qidiruv natijalari:",
+      innerData: result,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Server xatoligi: Seat ma'lumotlarini yuklab bo'lmadi.",
+      error: error.message,
+    });
+  }
+};
+
 module.exports = {
   createSeat,
   getSeats,
   getSeatById,
   updateSeat,
   deleteSeat,
-};
+  searchSeat,
+};

@@ -3,6 +3,7 @@ const router = Router();
 
 const {
   createRegion,
+  searchRegion,
   getRegions,
   getRegionById,
   updateRegion,
@@ -66,6 +67,30 @@ router.post(
  *         description: Serverdagi ichki xatolik
  */
 router.get("/get_region", getRegions);
+
+/**
+ * @swagger
+ * /region/search:
+ *   get:
+ *     summary: Regionlarni qidirish
+ *     tags: [Region]
+ *     description: Viloyat ma'lumotlarini qidirish
+ *     parameters:
+ *       - in: query
+ *         name: query
+ *         description: Qidiruv so'rovi
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Qidiruv natijalari muvaffaqiyatli qaytarildi
+ *       '400':
+ *         description: Yaroqsiz qidiruv so'rovi
+ *       '500':
+ *         description: Serverdagi ichki xatolik
+ */
+router.get("/search", searchRegion);
 
 /**
  * @swagger

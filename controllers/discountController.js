@@ -131,10 +131,42 @@ const deleteDiscount = async (req, res) => {
   }
 };
 
+const searchDiscount = async (req, res) => {
+  try {
+    const { query } = req.query;
+
+    if (!query || typeof query !== "string") {
+      return res.status(400).json({
+        success: false,
+        message: "Yaroqsiz qidiruv so'rovi.",
+      });
+    }
+
+    const result = await Discount.find({
+      $or: [
+        { discount: { $regex: query, $options: "i" } },
+      ],
+    });
+
+    return res.status(200).json({
+      success: true,
+      message: "Qidiruv natijalari:",
+      innerData: result,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Server xatoligi: Discount ma'lumotlarini yuklab bo'lmadi.",
+      error: error.message,
+    });
+  }
+};
+
 module.exports = {
   createDiscount,
   getDiscounts,
   getDiscountById,
   updateDiscount,
   deleteDiscount,
-};
+  searchDiscount,
+};

@@ -6,8 +6,8 @@ const ticketSchema = new Schema(
     seat_id: { type: Schema.Types.ObjectId, ref: "Seat", required: true },
     price: { type: Number, required: true },
     service_fee: { type: Number, required: true },
-    status_id: { type: Schema.Types.ObjectId, ref: "Status", required: true },
-    ticket_type_id: { type: Schema.Types.ObjectId, ref: "TicketType", required: true },
+    status_id: { type: Schema.Types.ObjectId, ref: "Ticket_status", required: true },
+    ticket_type_id: { type: Schema.Types.ObjectId, ref: "Tycket_type", required: true },
   },
   { timestamps: true }
 );

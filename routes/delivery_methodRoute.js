@@ -3,6 +3,7 @@ const router = Router();
 
 const {
   createDeliveryMethod,
+  searchDeliveryMethod,
   getDeliveryMethods,
   getDeliveryMethodById,
   updateDeliveryMethod,
@@ -62,6 +63,30 @@ router.post("/create_delivery_method",validateSchema(createDeliveryMethodValidat
  *         description: Serverdagi ichki xatolik
  */
 router.get("/getdelivery", getDeliveryMethods);
+
+/**
+ * @swagger
+ * /delivery_method/search:
+ *   get:
+ *     summary: Delivery methodlarni qidirish
+ *     tags: [DeliveryMethod]
+ *     description: Yetkazib berish usullarini qidirish
+ *     parameters:
+ *       - in: query
+ *         name: query
+ *         description: Qidiruv so'rovi
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Qidiruv natijalari muvaffaqiyatli qaytarildi
+ *       '400':
+ *         description: Yaroqsiz qidiruv so'rovi
+ *       '500':
+ *         description: Serverdagi ichki xatolik
+ */
+router.get("/search", searchDeliveryMethod);
 
 /**
  * @swagger

@@ -3,6 +3,7 @@ const router = Router();
 
 const {
   createSeat,
+  searchSeat,
   getSeats,
   getSeatById,
   updateSeat,
@@ -72,6 +73,30 @@ router.post("/create_seat",validateSchema(createSeatValidationSchema),createSeat
  *         description: Serverdagi ichki xatolik
  */
 router.get("/get_seat", getSeats);
+
+/**
+ * @swagger
+ * /seat/search:
+ *   get:
+ *     summary: Seatlarni qidirish
+ *     tags: [Seat]
+ *     description: O'rindiq ma'lumotlarini qidirish
+ *     parameters:
+ *       - in: query
+ *         name: query
+ *         description: Qidiruv so'rovi
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Qidiruv natijalari muvaffaqiyatli qaytarildi
+ *       '400':
+ *         description: Yaroqsiz qidiruv so'rovi
+ *       '500':
+ *         description: Serverdagi ichki xatolik
+ */
+router.get("/search", searchSeat);
 
 /**
  * @swagger
